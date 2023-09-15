@@ -9,10 +9,10 @@ const LS_KEY = 'contacts';
 export class App extends Component {
   state = {
     contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      { id: 'id-1', name: 'Rosie Simpson', number: '+1 459-124-5683' },
+      { id: 'id-2', name: 'Hermione Kline', number: '+1 443-893-1294' },
+      { id: 'id-3', name: 'Eden Clements', number: '+1 645-172-7959' },
+      { id: 'id-4', name: 'Annie Copeland', number: '+1 227-911-2655' },
     ],
     filter: ''   
   };
