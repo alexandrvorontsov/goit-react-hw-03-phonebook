@@ -2,19 +2,16 @@ import React, { Component } from 'react';
 import { ContactForm } from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactLisxt';
 import Filter from '../Filter/Filter';
-import {Phonebook} from './App.styled'
+import { Phonebook, MessageDelete, MessageCreate } from './App.styled';
 
 const LS_KEY = 'contacts';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '+1 459-124-5683' },
-      { id: 'id-2', name: 'Hermione Kline', number: '+1 443-893-1294' },
-      { id: 'id-3', name: 'Eden Clements', number: '+1 645-172-7959' },
-      { id: 'id-4', name: 'Annie Copeland', number: '+1 227-911-2655' },
-    ],
-    filter: ''   
+    contacts: [],
+    filter: '',
+    isDelete: false,
+    isCreate: false,
   };
 
   handleChange = evt => {
@@ -54,15 +51,27 @@ export class App extends Component {
 
   componentDidMount() {
     const contacts = JSON.parse(localStorage.getItem(LS_KEY)) || [];
-    this.setState({
-      ...this.state,
-      contacts,
-    });
+    this.setState({ ...this.state, contacts });
   }
 
+  // componentWillUnmount() {
+  //   console.log('componentWillUnmount');}
+
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.contacts.length !== this.state.contacts.length) {
-      localStorage.setItem(LS_KEY, JSON.stringify(this.state.contacts));
+    localStorage.setItem(LS_KEY, JSON.stringify(this.state.contacts));
+
+    if (prevState.contacts.length < this.state.contacts.length) {
+      this.setState({ isCreate: true });
+      setTimeout(() => {
+        this.setState({ isCreate: false });
+      }, 1000);
+    }
+
+    if (prevState.contacts.length > this.state.contacts.length) {
+      this.setState({ isDelete: true });
+      setTimeout(() => {
+        this.setState({ isDelete: false });
+      }, 1000);
     }
   }
 
@@ -80,6 +89,12 @@ export class App extends Component {
           getContacts={this.handleFilter()}
           deleteContact={this.handleDelete}
         />
+        {this.state.isDelete && (
+          <MessageDelete>Contact delete successfullly!</MessageDelete>
+        )}
+        {this.state.isCreate && (
+          <MessageCreate>Contact create successfullly!</MessageCreate>
+        )}
       </Phonebook>
     );
   }

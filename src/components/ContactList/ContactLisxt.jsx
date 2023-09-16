@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {BodyList,ListItem,ListButton} from './ContactList.styled'
+import { BodyList, ListItem, ListButton } from './ContactList.styled';
 
 const ContactList = ({ getContacts, deleteContact }) => {
   return (
@@ -10,10 +10,7 @@ const ContactList = ({ getContacts, deleteContact }) => {
             <ListItem key={id} id={id}>
               <span>{name}: </span>
               <span>{number}</span>
-              <ListButton
-                type="button"
-                onClick={evt => deleteContact(evt)}
-              >
+              <ListButton type="button" onClick={evt => deleteContact(evt)}>
                 Delete
               </ListButton>
             </ListItem>
